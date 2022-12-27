@@ -1,0 +1,21 @@
+name: Create Release
+# Publish a GitHub Release
+# Build Docker image with release tag
+# Runs on semantic versioned tags only
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+
+jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/docker.yml
+  release:
+    runs-on: ubuntu-latest
+    name: Release
+    steps:
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
